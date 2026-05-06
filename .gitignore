@@ -317,6 +317,7 @@ node_modules/
 .nuxt/
 .output/
 dist/
+web/README.md
 
 # Visual Studio 6 build log
 *.plg
