@@ -37,6 +37,16 @@ export function useCart() {
   };
 
   const addItem = (item: Omit<CartItem, "quantity">, quantity = 1) => {
+    // Prevent adding items from a different restaurant
+    if (items.value.length > 0) {
+      const currentRestaurant = items.value[0].restaurantId;
+      if (currentRestaurant !== item.restaurantId) {
+        showCartToast(
+          "You already have items from another restaurant. Clear your cart to add items from this restaurant.",
+        );
+        return;
+      }
+    }
     const existing = items.value.find(
       (entry: CartItem) => entry.id === item.id,
     );

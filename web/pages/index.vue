@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { request } = useApi();
-const { addItem } = useCart();
+const { addItem, items: cartItems } = useCart();
 
 type MenuItem = {
   id: string;
@@ -148,7 +148,12 @@ const restaurants = computed(() =>
                 {{ item.description }}
               </p>
               <button
-                class="w-full rounded-xl bg-amber-400 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-300"
+                :disabled="
+                  cartItems.length > 0 && cartItems[0].restaurantId !== restaurant.id && !cartItems.find(i => i.id === item.id)
+                "
+                :title="cartItems.length > 0 && cartItems[0].restaurantId !== restaurant.id && !cartItems.find(i => i.id === item.id) ? 'Clear your cart to add items from this restaurant' : ''"
+                class="w-full rounded-xl px-4 py-3 text-sm font-semibold text-slate-950 transition"
+                :class="(cartItems.length > 0 && cartItems[0].restaurantId !== restaurant.id && !cartItems.find(i => i.id === item.id)) ? 'bg-white/10 cursor-not-allowed opacity-60' : 'bg-amber-400 hover:bg-amber-300'"
                 @click="
                   addItem({
                     id: item.id,
