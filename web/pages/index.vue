@@ -149,11 +149,25 @@ const restaurants = computed(() =>
               </p>
               <button
                 :disabled="
-                  cartItems.length > 0 && cartItems[0].restaurantId !== restaurant.id && !cartItems.find(i => i.id === item.id)
+                  cartItems.length > 0 &&
+                  cartItems[0].restaurantId !== restaurant.id &&
+                  !cartItems.find((i) => i.id === item.id)
                 "
-                :title="cartItems.length > 0 && cartItems[0].restaurantId !== restaurant.id && !cartItems.find(i => i.id === item.id) ? 'Clear your cart to add items from this restaurant' : ''"
+                :title="
+                  cartItems.length > 0 &&
+                  cartItems[0].restaurantId !== restaurant.id &&
+                  !cartItems.find((i) => i.id === item.id)
+                    ? 'Clear your cart to add items from this restaurant'
+                    : ''
+                "
                 class="w-full rounded-xl px-4 py-3 text-sm font-semibold text-slate-950 transition"
-                :class="(cartItems.length > 0 && cartItems[0].restaurantId !== restaurant.id && !cartItems.find(i => i.id === item.id)) ? 'bg-white/10 cursor-not-allowed opacity-60' : 'bg-amber-400 hover:bg-amber-300'"
+                :class="
+                  cartItems.length > 0 &&
+                  cartItems[0].restaurantId !== restaurant.id &&
+                  !cartItems.find((i) => i.id === item.id)
+                    ? 'bg-white/10 cursor-not-allowed opacity-60'
+                    : 'bg-amber-400 hover:bg-amber-300'
+                "
                 @click="
                   addItem({
                     id: item.id,
